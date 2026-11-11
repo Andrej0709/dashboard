@@ -13,7 +13,7 @@ import Saved from './pages/Saved';
 import Settings from './pages/Settings';
 import { BACKGROUNDS, useStore } from './store';
 import { fetchWeather } from './lib/weather';
-import { useMobile } from './lib/useMobile';
+import { useAppHeight, useMobile } from './lib/useMobile';
 
 const PAGES = { home: Home, tasks: Tasks, calendar: Calendar, habits: Habits, finance: Finance, weather: Weather, saved: Saved, settings: Settings };
 const IS_DESKTOP = navigator.userAgent.includes('Electron');
@@ -45,6 +45,7 @@ export default function App() {
   const [customBg, setCustomBg] = useState(readCustomBg);
   const now = useNow();
   const mobile = useMobile();
+  const appHeight = useAppHeight();
 
   const settings = useStore((s) => s.settings);
   const setWeather = useStore((s) => s.setWeather);
@@ -93,6 +94,7 @@ export default function App() {
     <div
       className="relative h-full overflow-hidden"
       style={{
+        height: appHeight,
         '--glass-blur': `${settings.blur}px`,
         '--glass-tint': settings.tint / 100,
         '--rail-left': mobile ? '16px' : 'clamp(20px, 5.5vw, 80px)',

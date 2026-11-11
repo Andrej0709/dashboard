@@ -17,7 +17,7 @@ export function BottomNav({ page, go }) {
   return (
     <nav
       aria-label="Sections"
-      className="fixed inset-x-0 bottom-0 z-30 flex justify-center px-3"
+      className="absolute inset-x-0 bottom-0 z-30 flex justify-center px-3"
       style={{ paddingBottom: 'max(10px, env(safe-area-inset-bottom))' }}
     >
       <div className="glass flex w-full max-w-[420px] justify-between rounded-full p-[6px]" style={{ '--glass-tint': 0.56 }}>
