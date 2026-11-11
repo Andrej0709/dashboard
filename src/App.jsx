@@ -110,22 +110,20 @@ export default function App() {
         style={{ background: 'linear-gradient(180deg, rgba(12,9,7,0.5) 0%, rgba(12,9,7,0.12) 20%, rgba(12,9,7,0.06) 60%, rgba(12,9,7,0.34) 100%)' }}
       />
 
-      {/* phone: progressive blur behind the top bar, so cards dissolve instead of being cut off.
+      {/* progressive blur behind the top bar, so cards dissolve instead of being cut off.
           A sibling of the content, never its parent, so the glass cards keep their own blur. */}
-      {mobile && (
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 top-0 z-[35]"
-          style={{
-            height: `calc(var(--safe-top) + ${top + 78}px)`,
-            background: 'linear-gradient(180deg, rgba(12,9,7,0.42) 0%, rgba(12,9,7,0.18) 55%, rgba(12,9,7,0) 100%)',
-            WebkitBackdropFilter: 'blur(18px)',
-            backdropFilter: 'blur(18px)',
-            WebkitMaskImage: 'linear-gradient(180deg, #000 0%, #000 50%, transparent 100%)',
-            maskImage: 'linear-gradient(180deg, #000 0%, #000 50%, transparent 100%)',
-          }}
-        />
-      )}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 z-[35]"
+        style={{
+          height: `calc(var(--safe-top) + ${top + (mobile ? 64 : 74)}px)`, // fade ends where the page content starts
+          background: 'linear-gradient(180deg, rgba(12,9,7,0.42) 0%, rgba(12,9,7,0.18) 55%, rgba(12,9,7,0) 100%)',
+          WebkitBackdropFilter: 'blur(18px)',
+          backdropFilter: 'blur(18px)',
+          WebkitMaskImage: 'linear-gradient(180deg, #000 0%, #000 50%, transparent 100%)',
+          maskImage: 'linear-gradient(180deg, #000 0%, #000 50%, transparent 100%)',
+        }}
+      />
       <TopBar page={page} go={go} top={top} mobile={mobile} railHidden={railHidden} toggleRail={() => setRailHidden((v) => !v)} />
       {mobile ? <BottomNav page={page} go={go} /> : <Sidebar page={page} go={go} hidden={railHidden} />}
 
@@ -133,20 +131,18 @@ export default function App() {
         ref={mainRef}
         className="no-scrollbar absolute inset-x-0 bottom-0 overflow-y-auto overflow-x-hidden"
         style={{
-          // on a phone the content runs up under the top bar and fades into the blur there
-          top: mobile ? 0 : `calc(var(--safe-top) + ${top + 56}px)`,
+          // the content runs up under the top bar and fades into the blur there
+          top: 0,
           paddingLeft: railHidden || mobile ? 'var(--rail-left)' : 'var(--edge-left)',
           paddingRight: 'var(--edge-right)',
           transition: 'padding-left 0.35s cubic-bezier(0.22,1,0.36,1)',
         }}
       >
         <div
-          className={mobile ? '' : 'pb-12 pt-3'}
-          style={
-            mobile
-              ? { paddingTop: `calc(var(--safe-top) + ${top + 58}px)`, paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 96px)' }
-              : undefined
-          }
+          style={{
+            paddingTop: `calc(var(--safe-top) + ${top + (mobile ? 58 : 68)}px)`,
+            paddingBottom: mobile ? 'calc(env(safe-area-inset-bottom, 0px) + 96px)' : 48,
+          }}
         >
           <AnimatePresence mode="wait" onExitComplete={resetScroll}>
             <Page
