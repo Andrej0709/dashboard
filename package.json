@@ -1,0 +1,35 @@
+{
+  "name": "glassy-dashboard",
+  "productName": "Glassy Dashboard",
+  "version": "1.0.0",
+  "description": "Personal daily dashboard with a glass UI",
+  "private": true,
+  "type": "module",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "start": "vite build && electron .",
+    "app": "electron .",
+    "icon": "electron scripts/make-icon.cjs",
+    "icon:pwa": "electron scripts/make-pwa-icons.cjs",
+    "package": "vite build && node scripts/package.mjs"
+  },
+  "dependencies": {
+    "@fontsource/poppins": "^5.3.0",
+    "@supabase/supabase-js": "^2.119.0",
+    "lucide-react": "^1.71.0",
+    "motion": "^14.12.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "zustand": "^5.1.0"
+  },
+  "devDependencies": {
+    "@electron/packager": "^20.3.0",
+    "@tailwindcss/vite": "^4.3.5",
+    "@vitejs/plugin-react": "^6.3.0",
+    "electron": "^45.3.0",
+    "tailwindcss": "^4.3.5",
+    "vite": "^8.3.7"
+  }
+}

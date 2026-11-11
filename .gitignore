@@ -1,0 +1,12 @@
+node_modules/
+dist/
+release/
+
+# keys stay on this computer (Vercel gets them as environment variables)
+.env
+.env.local
+.env.*.local
+
+.vercel/
+.claude/settings.local.json
+*.log
